@@ -9,7 +9,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.accenture.lkm.dao.EmployeeDAO;
+import com.accenture.lkm.dao.StepDAO;
 import com.acceture.lkm.beans.Employee;
+import com.acceture.lkm.beans.Step;
 
 @Path("/employees")
 public class EmployeeResource {
@@ -33,4 +35,6 @@ public class EmployeeResource {
 	public List<Employee> findByManager(@PathParam("id") String managerId) {
 		return dao.findByManager(Integer.parseInt(managerId));
 	}
+
+	
 }

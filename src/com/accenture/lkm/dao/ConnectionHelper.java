@@ -15,11 +15,11 @@ public class ConnectionHelper
     	String driver = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			url = "jdbc:mysql://localhost/directory";
-            ResourceBundle bundle = ResourceBundle.getBundle("directory");
-            driver = bundle.getString("jdbc.driver");
-            Class.forName(driver);
-            url=bundle.getString("jdbc.url");
+			url = "jdbc:mysql://localhost/dashboard";
+            //ResourceBundle bundle = ResourceBundle.getBundle("dashboard");
+            //driver = bundle.getString("jdbc.driver");
+            //Class.forName(driver);
+           // url=bundle.getString("jdbc.url");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
