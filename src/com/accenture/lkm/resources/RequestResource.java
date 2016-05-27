@@ -18,7 +18,7 @@ public class RequestResource {
 
 
 	@GET	
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({MediaType.APPLICATION_JSON})
 	public List<Request> findById(@QueryParam("flowId") String flowId,@QueryParam("stepId") String stepId) {
 		return dao.findByFlowStep(flowId, stepId);
 	}
