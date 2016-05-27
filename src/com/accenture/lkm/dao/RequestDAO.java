@@ -23,7 +23,7 @@ public class RequestDAO {
     	String sql = "select a.* from flowdetails a "
     			+ "left outer join "
     			+ "		steps b on a.stepId=b.stepid "
-    			+ "        left outer join flows c on c.flowid=b.flowid where c.flowid='"+flowid+"'and a.stepid in ('"+stepid+"')";
+    			+ "        left outer join flows c on c.flowid=b.flowid where c.flowid='"+flowid+"'and a.stepid in ("+stepid+")";
         try {
             c = ConnectionHelper.getConnection();
             PreparedStatement ps = c.prepareStatement(sql);
