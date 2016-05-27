@@ -40,16 +40,24 @@ public class RequestDAO {
         return list;
     }
     
-
- 
-    
+   
     protected Request processSummaryRow(ResultSet rs) throws SQLException {
+    	
     	Request request = new Request();
-    	request.setStepId(rs.getString("stepId"));
-    	request.setApiUrl(rs.getString("apiUrl"));
-    	request.setApiName(rs.getString("apiName"));
-    	request.setApiRequestType(rs.getString("apiRequestType"));
+    	
     	request.setFlowStepId(rs.getString("flowStepId"));
+    	request.setStepId(rs.getString("stepId"));
+    	request.setSequence(rs.getString("sequence"));
+    	request.setMethod(rs.getString("method"));
+    	request.setResponeCode(rs.getString("responseCode"));
+    	
+    	if(rs.getString("apiUrl") == null) {
+    		request.setApiUrl("URL is not available");
+    	}    		
+    	else {
+    		request.setApiUrl(rs.getString("apiUrl"));
+    	}
+    	
     	return request;
     }
     
