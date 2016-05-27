@@ -10,17 +10,11 @@ public class Request {
 	
 	private String flowStepId = "";
 	private String stepId = "";
-	private String apiNumber = "";
-	private String apiName = "";
+	private String sequence = "";
+	private String method = "";
+	private String responeCode = "";	
 	private String apiUrl = "";
-	private String apiDescription = "";
-	private String apiRequestType = "";
-	private String jsonName = "";
-	private String jsonUrl = "";
-	private String jsonRequestType = "";
-	private String jsonDescription = "";
-	private String imageName = "";
-
+	
 	public String getFlowStepId() {
 		return flowStepId;
 	}
@@ -33,17 +27,23 @@ public class Request {
 	public void setStepId(String stepId) {
 		this.stepId = stepId;
 	}
-	public String getApiNumber() {
-		return apiNumber;
+	public String getSequence() {
+		return sequence;
 	}
-	public void setApiNumber(String apiNumber) {
-		this.apiNumber = apiNumber;
+	public void setSequence(String sequence) {
+		this.sequence = sequence;
 	}
-	public String getApiName() {
-		return apiName;
+	public String getMethod() {
+		return method;
 	}
-	public void setApiName(String apiName) {
-		this.apiName = apiName;
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	public String getResponeCode() {
+		return responeCode;
+	}
+	public void setResponeCode(String responeCode) {
+		this.responeCode = responeCode;
 	}
 	public String getApiUrl() {
 		return apiUrl;
@@ -51,48 +51,5 @@ public class Request {
 	public void setApiUrl(String apiUrl) {
 		this.apiUrl = apiUrl;
 	}
-	public String getApiDescription() {
-		return apiDescription;
-	}
-	public void setApiDescription(String apiDescription) {
-		this.apiDescription = apiDescription;
-	}
-	public String getApiRequestType() {
-		return apiRequestType;
-	}
-	public void setApiRequestType(String apiRequestType) {
-		this.apiRequestType = apiRequestType;
-	}
-	public String getJsonName() {
-		return jsonName;
-	}
-	public void setJsonName(String jsonName) {
-		this.jsonName = jsonName;
-	}
-	public String getJsonUrl() {
-		return jsonUrl;
-	}
-	public void setJsonUrl(String jsonUrl) {
-		this.jsonUrl = jsonUrl;
-	}
-	public String getJsonRequestType() {
-		return jsonRequestType;
-	}
-	public void setJsonRequestType(String jsonRequestType) {
-		this.jsonRequestType = jsonRequestType;
-	}
-	public String getJsonDescription() {
-		return jsonDescription;
-	}
-	public void setJsonDescription(String jsonDescription) {
-		this.jsonDescription = jsonDescription;
-	}
-	public String getImageName() {
-		return imageName;
-	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-	
 
 }
