@@ -15,7 +15,7 @@ public class ConnectionHelper
     	String driver = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			url = "jdbc:mysql://localhost/dashboard";
+			url = "jdbc:mysql://localhost/apidashboard";
             //ResourceBundle bundle = ResourceBundle.getBundle("dashboard");
             //driver = bundle.getString("jdbc.driver");
             //Class.forName(driver);

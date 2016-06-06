@@ -7,12 +7,12 @@
 
 <script>
 var _glb;   
+var _glbreq;
 var _stepId;
 function selectFlow()
 {
 var wf= $("#wf").val();
 
-console.log(window.location.href);
 	$.get("./rest/step/"+wf, function(result){
 		_glb=result;
 		 var str='<SELECT NAME="toppings" MULTIPLE SIZE=10 onclick="javascript:populate(this.value)"> ';
@@ -37,10 +37,28 @@ function populate(sel){
 			$("#desc").html(value.stepName);
 		}
 	});
+	 $.get("./rest/request?flowId="+$("#wf").val()+"&stepId="+_stepId, function(result){
+			_glbreq=result.request;
+			//angular.element($('#ctrl')).scope().update();
+			//angular.element($('#ctrl')).scope().$apply()
+			 var scope = angular.element($("#ctrl")).scope();
+		        scope.$apply(function() {
+		        scope.update();
+				});
+		});
 }
 
 function showRequest(){
-	 $("#ctrl").show();
+	var isVisible = $( "#ctrl" ).is( ":visible" ); 
+	if(isVisible){
+		$("#req").html("Hide Requests")	
+	}else{
+		$("#req").html("Show Requests")
+	}
+	$("#ctrl").toggle();
+	 
+	
+	 
 }
 </script>
 
@@ -50,7 +68,7 @@ function showRequest(){
    <script>  
      var app = angular.module('MyForm', ['ui.bootstrap', 'ngResource']);  
      app.controller('myCtrl', function ($scope) {  
-       $scope.predicate = 'name';  
+       $scope.predicate = 'apiUrl';  
        $scope.reverse = true;  
        $scope.currentPage = 1;  
        $scope.order = function (predicate) {  
@@ -69,8 +87,15 @@ function showRequest(){
          { name: 'Patrick', age: 40, gender: 'boy' },  
          { name: 'Tery', age: 60, gender: 'girl' }  
        ];  
+      
+       $scope.update= function(){
+    	   $scope.students=_glbreq;
+    	   $scope.totalItems = $scope.students.length;  
+    	   $scope.paginate();
+       }
+       
        $scope.totalItems = $scope.students.length;  
-       $scope.numPerPage = 5;  
+       $scope.numPerPage = 20;  
        $scope.paginate = function (value) {  
          var begin, end, index;  
          begin = ($scope.currentPage - 1) * $scope.numPerPage;  
@@ -83,7 +108,7 @@ function showRequest(){
    <style>  
      .odd {  
        background-color: antiquewhite;  
-       color: #008b8b;  
+       color: darkgray;  
      }  
      td th {  
        height: 30px;  
@@ -103,7 +128,7 @@ function showRequest(){
   <option value="1001">Lookup Workflow</option> 
 </select>
 <button onclick="selectFlow();">Submit</button>	
-<button onclick="showRequest();" id="req" style="display:none">Show Request</button>
+<button onclick="showRequest();" id="req" style="display:none">Show Requests</button>
 <table>
 	<tr>
 	<td valign="top"><div id="jssor">
@@ -123,40 +148,41 @@ function showRequest(){
 </table>
    
  <div id="ctrl" ng-controller="myCtrl" style="display:none">  
-     <h3>Step Request</h3>  
+     <h3>Step Requests</h3> 
      <div class="container-fluid">  
        <pre>Click header link to sort, input into filter text to filter</pre>  
+      
        <hr />  
        <table class="table table-striped">  
          <thead>  
            <tr>  
                
              <th>  
-               <a href="" ng-click="order('name')">Name</a>  
+               <a href="" ng-click="order('responeCode')">Response Code</a>  
              </th>  
-             <th><a href="" ng-click="order('age')"> Age</a> </th>  
-             <th><a href="" ng-click="order('gender')">Gender</a> </th>  
+             <th><a href="" ng-click="order('method')"> Method</a> </th>  
+             <th><a href="" ng-click="order('apiUrl')">URL</a> </th>  
            </tr>  
          </thead>  
          <tbody>  
            <tr>  
              
-             <td> <input type="text" ng-model="search.name" /></td>  
-             <td> <input type="text" ng-model="search.age" /> </td>  
-             <td><input type="text" ng-model="search.gender" /> </td>  
+             <td> <input type="text" ng-model="search.responeCode" /></td>  
+             <td> <input type="text" ng-model="search.method" /> </td>  
+             <td><input type="text" ng-model="search.apiUrl" /> </td>  
            </tr>  
-           <tr ng-repeat="user in students | orderBy:predicate:reverse | filter:paginate| filter:search" ng-class-odd="'odd'">  
+           <tr ng-repeat="user in students | orderBy:predicate:reverse | filter:paginate| filter:search  track by $index" ng-class-odd="'odd'">  
     
-             <td>{{ user.name}}</td>  
-             <td>{{ user.age}}</td>  
-             <td>{{ user.gender}}</td>  
+             <td>{{ user.responeCode}}</td>  
+             <td>{{ user.method}}</td>  
+             <td>{{ user.apiUrl | limitTo: 50 }}{{user.apiUrl.length > 50 ? '...' : ''}}</td>  
            </tr>  
          </tbody>  
        </table>  
-       <pagination total-items="totalItems" ng-model="currentPage"  
-             max-size="5" boundary-links="true"  
+          <pagination total-items="totalItems" ng-model="currentPage"  
+             max-size="1000" boundary-links="true"  
              items-per-page="numPerPage" class="pagination-sm">  
-       </pagination>  
+       </pagination>
      </div>  
    </div>  
  </body>  
